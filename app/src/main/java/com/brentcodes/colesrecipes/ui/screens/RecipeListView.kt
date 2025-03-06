@@ -33,7 +33,7 @@ fun RecipeListView(modifier: Modifier = Modifier, navController: NavController) 
                 /*Text(it.dynamicTitle)*/
                 RecipeCard(
                     thumbnail = "https://coles.com.au/" + recipe.dynamicThumbnail,
-                    thumbnailAlt = "https://coles.com.au/" + recipe.dynamicThumbnailAlt,
+                    thumbnailAlt = recipe.dynamicThumbnailAlt,
                     title = recipe.dynamicTitle
                 )
             }

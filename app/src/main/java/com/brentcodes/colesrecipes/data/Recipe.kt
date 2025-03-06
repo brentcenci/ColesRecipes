@@ -8,6 +8,6 @@ data class Recipe(
     val dynamicDescription: String,
     val dynamicThumbnail: String,
     val dynamicThumbnailAlt: String,
-    val recipeDetails: RecipeDetails,
+    val recipeStats: RecipeStats,
     val ingredients: List<Map<String, String>>
 )
