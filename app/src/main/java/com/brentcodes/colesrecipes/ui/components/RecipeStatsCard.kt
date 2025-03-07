@@ -12,14 +12,17 @@ import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.brentcodes.colesrecipes.data.RecipeDetails
 import com.brentcodes.colesrecipes.ui.theme.ColesRecipesTheme
 
 @Composable
 fun RecipeStatsCard(modifier: Modifier = Modifier, recipeDetails: RecipeDetails) {
     Column(modifier = modifier) {
-        HorizontalDivider(thickness = 3.dp)
+        HorizontalDivider(thickness = 3.dp, color = Color.LightGray.copy(alpha = 0.4f))
         Row(
             modifier = Modifier.padding(vertical = 10.dp)
         ) {
@@ -28,20 +31,20 @@ fun RecipeStatsCard(modifier: Modifier = Modifier, recipeDetails: RecipeDetails)
                 topText = recipeDetails.amountLabel,
                 bottomText = recipeDetails.amountNumber.toString()
             )
-            VerticalDivider(thickness = 2.dp)
+            VerticalDivider(thickness = 2.dp, color = Color.LightGray.copy(alpha = 0.4f))
             RecipeStatSection(
                 modifier = Modifier.weight(1f),
                 topText = recipeDetails.prepLabel,
                 bottomText = recipeDetails.prepTime
             )
-            VerticalDivider(thickness = 2.dp)
+            VerticalDivider(thickness = 2.dp, color = Color.LightGray.copy(alpha = 0.4f))
             RecipeStatSection(
                 modifier = Modifier.weight(1f),
                 topText = recipeDetails.cookingLabel,
                 bottomText = recipeDetails.cookingTime
             )
         }
-        HorizontalDivider(thickness = 3.dp)
+        HorizontalDivider(thickness = 3.dp, color = Color.LightGray.copy(alpha = 0.4f))
     }
 }
 
@@ -50,14 +53,14 @@ fun RecipeStatSection(modifier: Modifier = Modifier, topText: String, bottomText
     Column(modifier = modifier, verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
             text = topText,
-            fontSize = MaterialTheme.typography.labelMedium.fontSize,
+            fontSize = 14.sp/*MaterialTheme.typography.labelMedium.fontSize*/,
             fontWeight = MaterialTheme.typography.labelMedium.fontWeight,
             color = MaterialTheme.colorScheme.secondary
         )
         Text(
             text = bottomText,
-            fontSize = MaterialTheme.typography.labelLarge.fontSize,
-            fontWeight = MaterialTheme.typography.labelLarge.fontWeight
+            fontSize = 18.sp/*MaterialTheme.typography.labelLarge.fontSize*/,
+            fontWeight = FontWeight.Bold/*MaterialTheme.typography.labelLarge.fontWeight*/
         )
     }
 }
