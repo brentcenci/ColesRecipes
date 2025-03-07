@@ -14,11 +14,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.brentcodes.colesrecipes.ui.components.RecipeCard
 
 @Composable
-fun RecipeListView(modifier: Modifier = Modifier, navController: NavController, viewModel: RecipeViewModel, orientation: Int = 1) {
+fun RecipeListView(
+    modifier: Modifier = Modifier,
+    navController: NavController,
+    viewModel: RecipeViewModel,
+    orientation: Int = 1) {
 
     //Vertical Grid of 2-columns (when portrait - what about landscape?)
     //Display list of RecipeCards
@@ -30,9 +36,9 @@ fun RecipeListView(modifier: Modifier = Modifier, navController: NavController, 
     }
 
     LazyVerticalGrid(
-        modifier = Modifier.padding(vertical = 20.dp),
+        modifier = Modifier/*.padding(vertical = 20.dp)*/,
         columns = GridCells.Fixed(columns),
-        contentPadding = PaddingValues(5.dp),
+        contentPadding = PaddingValues(horizontal = 5.dp, vertical = 20.dp),
         verticalArrangement = Arrangement.spacedBy(30.dp)
     ) {
         recipesList?.let { response ->

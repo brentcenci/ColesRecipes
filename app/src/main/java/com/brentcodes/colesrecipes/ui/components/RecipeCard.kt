@@ -19,7 +19,7 @@ fun RecipeCard(modifier: Modifier = Modifier, thumbnail: String, thumbnailAlt: S
     //Should fill max-width, fixed height?
     //Clickable -> Navigates to Recipe Page
 
-    Column(modifier = modifier.fillMaxWidth().padding(5.dp)) {
+    Column(modifier = modifier.fillMaxWidth().padding(10.dp)) {
         AsyncImage(
             model = thumbnail,
             contentDescription = thumbnailAlt,
