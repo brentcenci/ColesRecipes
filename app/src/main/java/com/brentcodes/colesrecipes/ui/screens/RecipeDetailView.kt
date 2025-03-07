@@ -14,6 +14,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil3.compose.AsyncImage
 import com.brentcodes.colesrecipes.ui.components.RecipeDetailHeader
@@ -21,7 +23,11 @@ import com.brentcodes.colesrecipes.ui.components.RecipeIngredients
 import com.brentcodes.colesrecipes.ui.components.RecipeStatsCard
 
 @Composable
-fun RecipeDetailView(modifier: Modifier = Modifier, navController: NavController, viewModel: RecipeViewModel) {
+fun RecipeDetailView(
+    modifier: Modifier = Modifier,
+    navController: NavController,
+    viewModel: RecipeViewModel
+) {
 
     val selectedRecipe by viewModel.selectedRecipe.collectAsState()
 
