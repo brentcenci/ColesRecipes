@@ -1,5 +1,6 @@
 package com.brentcodes.colesrecipes
 
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -7,7 +8,14 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -29,12 +37,21 @@ class MainActivity : ComponentActivity() {
                     val navController = rememberNavController()
                     val viewModel = RecipeViewModel(repository = Repository(context = LocalContext.current))
 
+                    var orientation by remember { mutableStateOf(Configuration.ORIENTATION_PORTRAIT) }
+                    val configuration = LocalConfiguration.current
+
+                    LaunchedEffect(configuration) {
+                        snapshotFlow { configuration.orientation }
+                            .collect { orientation = it }
+                    }
+
                     NavHost(navController = navController, startDestination = "list", modifier = Modifier.padding(innerPadding)) {
                         composable(route = "list") {
                             RecipeListView(
                                 modifier = Modifier,
                                 navController = navController,
-                                viewModel = viewModel
+                                viewModel = viewModel,
+                                orientation = orientation
                             )
                         }
                         composable(route = "details") {
