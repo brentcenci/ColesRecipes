@@ -24,6 +24,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.brentcodes.colesrecipes.data.Repository
+import com.brentcodes.colesrecipes.ui.Screen
 import com.brentcodes.colesrecipes.ui.screens.RecipeDetailView
 import com.brentcodes.colesrecipes.ui.screens.RecipeListView
 import com.brentcodes.colesrecipes.ui.screens.RecipeViewModel
@@ -50,8 +51,8 @@ class MainActivity : ComponentActivity() {
                             .collect { orientation = it }
                     }
 
-                    NavHost(navController = navController, startDestination = "list", modifier = Modifier.padding(innerPadding)) {
-                        composable(route = "list") {
+                    NavHost(navController = navController, startDestination = Screen.List.route, modifier = Modifier.padding(innerPadding)) {
+                        composable(route = Screen.List.route) {
                             RecipeListView(
                                 modifier = Modifier,
                                 navController = navController,
@@ -59,7 +60,7 @@ class MainActivity : ComponentActivity() {
                                 viewModel = vm
                             )
                         }
-                        composable(route = "details") {
+                        composable(route = Screen.Details.route) {
                             RecipeDetailView(
                                 modifier = Modifier,
                                 navController = navController,
