@@ -3,7 +3,7 @@ package com.brentcodes.colesrecipes.data
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class RecipeStats(
+data class RecipeDetails(
     val amountLabel: String,
     val amountNumber: Int,
     val prepLabel: String,

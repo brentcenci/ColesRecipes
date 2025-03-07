@@ -9,12 +9,12 @@ import androidx.compose.ui.graphics.Color
 import coil3.compose.AsyncImage
 
 @Composable
-fun RecipeCard(thumbnail: String, thumbnailAlt: String, title: String) {
+fun RecipeCard(modifier: Modifier = Modifier, thumbnail: String, thumbnailAlt: String, title: String) {
 
     //Should fill max-width, fixed height?
     //Clickable -> Navigates to Recipe Page
 
-    Column(modifier = Modifier.fillMaxWidth()) {
+    Column(modifier = modifier.fillMaxWidth()) {
         AsyncImage(model = thumbnail, contentDescription = thumbnailAlt, modifier = Modifier.fillMaxWidth())
         Text(text = "RECIPE", color = Color.Red)
         Text(text = title)
