@@ -1,9 +1,10 @@
 package com.brentcodes.colesrecipes.ui.screens
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -22,26 +23,36 @@ fun RecipeDetailView(modifier: Modifier = Modifier, navController: NavController
     val selectedRecipe by viewModel.selectedRecipe.collectAsState()
 
     selectedRecipe?.let { recipe ->
-        Column(
+        LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(10.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             //Recipe Title
-            Text(text = recipe.dynamicTitle)
+            item {
+                Text(text = recipe.dynamicTitle)
+            }
             //Recipe Description
-            Text(text = recipe.dynamicDescription)
+            item {
+                Text(text = recipe.dynamicDescription)
+            }
             //Image
-            AsyncImage(
-                model = "https://coles.com.au/" + recipe.dynamicThumbnail,
-                contentDescription = recipe.dynamicThumbnailAlt,
-                modifier = Modifier.fillMaxWidth()
-            )
+            item {
+                AsyncImage(
+                    model = "https://coles.com.au/" + recipe.dynamicThumbnail,
+                    contentDescription = recipe.dynamicThumbnailAlt,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
             //Stats info (Serves, Prep time, Cooking time)
-            RecipeStatsCard(recipeDetails = recipe.recipeDetails)
+            item {
+                RecipeStatsCard(recipeDetails = recipe.recipeDetails, modifier = Modifier.fillMaxWidth().height(80.dp))
+            }
             //Ingredients
-            RecipeIngredients(recipe = recipe)
+            item {
+                RecipeIngredients(recipe = recipe)
+            }
         }
     }
 }
