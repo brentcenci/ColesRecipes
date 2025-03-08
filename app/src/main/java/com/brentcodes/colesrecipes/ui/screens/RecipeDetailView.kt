@@ -41,7 +41,7 @@ fun RecipeDetailView(
             //Recipe Title
             item {
                 RecipeDetailHeader(
-                    modifier = Modifier.padding(horizontal = 32.dp),
+                    modifier = Modifier.padding(horizontal = 34.dp),
                     title = recipe.dynamicTitle,
                     description = recipe.dynamicDescription
                 )

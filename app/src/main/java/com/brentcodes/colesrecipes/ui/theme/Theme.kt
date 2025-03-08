@@ -53,7 +53,7 @@ fun ColesRecipesTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = ColesTypography,
         content = content
     )
 }

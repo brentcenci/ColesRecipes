@@ -31,13 +31,15 @@ fun RecipeCard(modifier: Modifier = Modifier, thumbnail: String, thumbnailAlt: S
         Text(
             text = "RECIPE",
             color = MaterialTheme.colorScheme.colesRed,
-            fontSize = 14.sp,
-            fontWeight = FontWeight.Bold
+            fontSize = MaterialTheme.typography.titleMedium.fontSize,
+            fontWeight = MaterialTheme.typography.titleMedium.fontWeight,
+            textAlign = MaterialTheme.typography.titleMedium.textAlign
         )
         Text(
             text = title,
-            fontSize = 14.sp,
-            fontWeight = FontWeight.Medium
+            fontSize = MaterialTheme.typography.titleSmall.fontSize,
+            fontWeight = MaterialTheme.typography.titleSmall.fontWeight,
+            textAlign = MaterialTheme.typography.titleSmall.textAlign
         )
     }
 }

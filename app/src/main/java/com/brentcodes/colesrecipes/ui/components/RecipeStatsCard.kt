@@ -55,14 +55,16 @@ fun RecipeStatSection(modifier: Modifier = Modifier, topText: String, bottomText
     Column(modifier = modifier, verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
             text = topText,
-            fontSize = 14.sp,
+            fontSize = MaterialTheme.typography.labelMedium.fontSize,
             fontWeight = MaterialTheme.typography.labelMedium.fontWeight,
+            textAlign = MaterialTheme.typography.labelMedium.textAlign,
             color = MaterialTheme.colorScheme.textGrey
         )
         Text(
             text = bottomText,
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold
+            fontSize = MaterialTheme.typography.labelLarge.fontSize,
+            fontWeight = MaterialTheme.typography.labelLarge.fontWeight,
+            textAlign = MaterialTheme.typography.labelLarge.textAlign
         )
     }
 }

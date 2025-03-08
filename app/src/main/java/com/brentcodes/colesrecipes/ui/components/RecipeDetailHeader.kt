@@ -18,15 +18,15 @@ fun RecipeDetailHeader(modifier: Modifier = Modifier, title: String, description
     Column(modifier = modifier) {
         Text(
             text = title,
-            textAlign = TextAlign.Center,
-            fontSize = 48.sp,
-            fontWeight = FontWeight.Black,
-            lineHeight = TextUnit(48f, type = TextUnitType.Sp),
+            textAlign = MaterialTheme.typography.headlineLarge.textAlign,
+            fontSize = MaterialTheme.typography.headlineLarge.fontSize,
+            fontWeight = MaterialTheme.typography.headlineLarge.fontWeight,
+            lineHeight = MaterialTheme.typography.headlineLarge.lineHeight,
             modifier = Modifier.padding(vertical = 20.dp)
         )
         Text(
             text = description,
-            textAlign = TextAlign.Center,
+            textAlign = MaterialTheme.typography.bodyLarge.textAlign,
             fontSize = MaterialTheme.typography.bodyLarge.fontSize,
             fontWeight = MaterialTheme.typography.bodyLarge.fontWeight
         )
