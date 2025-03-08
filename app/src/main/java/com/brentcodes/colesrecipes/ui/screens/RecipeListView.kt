@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.brentcodes.colesrecipes.ui.ErrorState
 import com.brentcodes.colesrecipes.ui.components.RecipeCard
 import kotlinx.serialization.internal.throwMissingFieldException
 
@@ -29,35 +30,38 @@ fun RecipeListView(
     viewModel: RecipeViewModel,
     orientation: Int = 1) {
 
-    //Vertical Grid of 2-columns (when portrait - what about landscape?)
-    //Display list of RecipeCards
-    //This screen needs access to the data list, and then calls an items on the data and translates it into RecipeCards
     val recipesList by viewModel.recipes.collectAsState()
+    val errorState by viewModel.errorState.collectAsState()
     val columns = when (orientation) {
         Configuration.ORIENTATION_PORTRAIT -> 1
         else -> 2
     }
-
-    LazyVerticalGrid(
-        modifier = Modifier/*.padding(vertical = 20.dp)*/,
-        columns = GridCells.Fixed(columns),
-        contentPadding = PaddingValues(horizontal = 5.dp, vertical = 20.dp),
-        verticalArrangement = Arrangement.spacedBy(30.dp)
-    ) {
-        recipesList?.let { response ->
-            items(response.recipes) { recipe ->
-                /*Text(it.dynamicTitle)*/
-                RecipeCard(
-                    modifier = Modifier.clickable {
-                        viewModel.selectRecipe(recipe = recipe)
-                        navController.navigate(route = "details")
-                    },
-                    thumbnail = "https://coles.com.au/" + recipe.dynamicThumbnail,
-                    thumbnailAlt = recipe.dynamicThumbnailAlt,
-                    title = recipe.dynamicTitle
-                )
+    if (errorState == ErrorState.ERROR) {
+        ErrorScreen(
+            errorType = "Error Loading Data",
+            errorMessage = "Unable to load data. Please try launching the application again. If error persists, review logs."
+        )
+    } else {
+        LazyVerticalGrid(
+            modifier = Modifier,
+            columns = GridCells.Fixed(columns),
+            contentPadding = PaddingValues(horizontal = 5.dp, vertical = 20.dp),
+            verticalArrangement = Arrangement.spacedBy(30.dp)
+        ) {
+            recipesList?.let { response ->
+                items(response.recipes) { recipe ->
+                    RecipeCard(
+                        modifier = Modifier.clickable {
+                            viewModel.selectRecipe(recipe = recipe)
+                            navController.navigate(route = "details")
+                        },
+                        thumbnail = "https://coles.com.au/" + recipe.dynamicThumbnail,
+                        thumbnailAlt = recipe.dynamicThumbnailAlt,
+                        title = recipe.dynamicTitle
+                    )
+                }
             }
         }
-
     }
+
 }
