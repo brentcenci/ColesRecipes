@@ -9,22 +9,15 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import coil3.compose.AsyncImage
 import coil3.compose.rememberAsyncImagePainter
 import com.brentcodes.colesrecipes.R
 import com.brentcodes.colesrecipes.ui.theme.colesRed
 
 @Composable
 fun RecipeCard(modifier: Modifier = Modifier, thumbnail: String, thumbnailAlt: String, title: String) {
-
-    //Should fill max-width, fixed height?
-    //Clickable -> Navigates to Recipe Page
 
     Column(modifier = modifier.fillMaxWidth().padding(10.dp)) {
         Image(

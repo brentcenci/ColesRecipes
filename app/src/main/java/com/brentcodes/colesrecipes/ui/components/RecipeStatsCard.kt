@@ -1,6 +1,5 @@
 package com.brentcodes.colesrecipes.ui.components
 
-import android.content.res.Resources
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,12 +11,8 @@ import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.brentcodes.colesrecipes.data.RecipeDetails
-import com.brentcodes.colesrecipes.ui.theme.ColesRecipesTheme
 import com.brentcodes.colesrecipes.ui.theme.accentGrey
 import com.brentcodes.colesrecipes.ui.theme.textGrey
 

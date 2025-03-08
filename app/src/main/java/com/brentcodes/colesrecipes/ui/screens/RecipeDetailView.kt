@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -17,10 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import coil3.compose.AsyncImage
 import coil3.compose.rememberAsyncImagePainter
 import com.brentcodes.colesrecipes.R
 import com.brentcodes.colesrecipes.ui.components.RecipeDetailHeader
@@ -43,7 +38,6 @@ fun RecipeDetailView(
                 .padding(10.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            //Recipe Title
             item {
                 RecipeDetailHeader(
                     modifier = Modifier.padding(horizontal = 34.dp),
@@ -51,7 +45,6 @@ fun RecipeDetailView(
                     description = recipe.dynamicDescription
                 )
             }
-            //Image
             item {
                 Image(
                     painter = rememberAsyncImagePainter(
@@ -67,11 +60,9 @@ fun RecipeDetailView(
                     contentScale = ContentScale.FillWidth
                 )
             }
-            //Stats info (Serves, Prep time, Cooking time)
             item {
                 RecipeStatsCard(recipeDetails = recipe.recipeDetails, modifier = Modifier.fillMaxWidth().height(80.dp))
             }
-            //Ingredients
             item {
                 RecipeIngredients(recipe = recipe)
             }
