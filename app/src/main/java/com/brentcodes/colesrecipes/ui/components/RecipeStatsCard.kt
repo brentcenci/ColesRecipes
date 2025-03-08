@@ -18,11 +18,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.brentcodes.colesrecipes.data.RecipeDetails
 import com.brentcodes.colesrecipes.ui.theme.ColesRecipesTheme
+import com.brentcodes.colesrecipes.ui.theme.accentGrey
+import com.brentcodes.colesrecipes.ui.theme.textGrey
 
 @Composable
 fun RecipeStatsCard(modifier: Modifier = Modifier, recipeDetails: RecipeDetails) {
     Column(modifier = modifier) {
-        HorizontalDivider(thickness = 3.dp, color = Color.LightGray.copy(alpha = 0.4f))
+        HorizontalDivider(thickness = 3.dp, color = MaterialTheme.colorScheme.accentGrey)
         Row(
             modifier = Modifier.padding(vertical = 10.dp)
         ) {
@@ -31,20 +33,20 @@ fun RecipeStatsCard(modifier: Modifier = Modifier, recipeDetails: RecipeDetails)
                 topText = recipeDetails.amountLabel,
                 bottomText = recipeDetails.amountNumber.toString()
             )
-            VerticalDivider(thickness = 2.dp, color = Color.LightGray.copy(alpha = 0.4f))
+            VerticalDivider(thickness = 2.dp, color = MaterialTheme.colorScheme.accentGrey)
             RecipeStatSection(
                 modifier = Modifier.weight(1f),
                 topText = recipeDetails.prepLabel,
                 bottomText = recipeDetails.prepTime
             )
-            VerticalDivider(thickness = 2.dp, color = Color.LightGray.copy(alpha = 0.4f))
+            VerticalDivider(thickness = 2.dp, color = MaterialTheme.colorScheme.accentGrey)
             RecipeStatSection(
                 modifier = Modifier.weight(1f),
                 topText = recipeDetails.cookingLabel,
                 bottomText = recipeDetails.cookingTime
             )
         }
-        HorizontalDivider(thickness = 3.dp, color = Color.LightGray.copy(alpha = 0.4f))
+        HorizontalDivider(thickness = 3.dp, color = MaterialTheme.colorScheme.accentGrey)
     }
 }
 
@@ -53,14 +55,16 @@ fun RecipeStatSection(modifier: Modifier = Modifier, topText: String, bottomText
     Column(modifier = modifier, verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
             text = topText,
-            fontSize = 14.sp/*MaterialTheme.typography.labelMedium.fontSize*/,
+            fontSize = MaterialTheme.typography.labelMedium.fontSize,
             fontWeight = MaterialTheme.typography.labelMedium.fontWeight,
-            color = MaterialTheme.colorScheme.secondary
+            textAlign = MaterialTheme.typography.labelMedium.textAlign,
+            color = MaterialTheme.colorScheme.textGrey
         )
         Text(
             text = bottomText,
-            fontSize = 18.sp/*MaterialTheme.typography.labelLarge.fontSize*/,
-            fontWeight = FontWeight.Bold/*MaterialTheme.typography.labelLarge.fontWeight*/
+            fontSize = MaterialTheme.typography.labelLarge.fontSize,
+            fontWeight = MaterialTheme.typography.labelLarge.fontWeight,
+            textAlign = MaterialTheme.typography.labelLarge.textAlign
         )
     }
 }
