@@ -1,7 +1,8 @@
 package com.brentcodes.colesrecipes
 
 import android.content.Context
-import com.brentcodes.colesrecipes.data.Repository
+import com.brentcodes.colesrecipes.data.ColesRepository
+import com.brentcodes.colesrecipes.data.ColesRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,7 +16,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideRepository(@ApplicationContext context: Context): Repository {
-        return Repository(context)
+    fun provideRepository(@ApplicationContext context: Context): ColesRepository {
+        return ColesRepositoryImpl(context)
     }
 }
