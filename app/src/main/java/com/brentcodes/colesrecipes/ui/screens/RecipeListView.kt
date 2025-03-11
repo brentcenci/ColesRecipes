@@ -1,37 +1,41 @@
 package com.brentcodes.colesrecipes.ui.screens
 
 import android.content.res.Configuration
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import com.brentcodes.colesrecipes.ui.ErrorState
 import com.brentcodes.colesrecipes.ui.components.RecipeCard
-import kotlinx.serialization.internal.throwMissingFieldException
 
 @Composable
 fun RecipeListView(
-    modifier: Modifier = Modifier,
-    navController: NavController,
-    viewModel: RecipeViewModel,
-    orientation: Int = 1) {
+    viewModel: RecipeListViewModel,
+    orientation: Int = 1,
+    onNavigateToDetails: () -> Unit
+) {
 
-    val recipesList by viewModel.recipes.collectAsState()
+    val recipesList by viewModel.recipes
     val errorState by viewModel.errorState.collectAsState()
+    val userEvent by viewModel.userEvent.collectAsState()
+
+    LaunchedEffect(userEvent) {
+        Log.d("User Event", "User Event detected")
+        if (userEvent == UserEvent.NAVIGATE_TO_DETAILS){
+            onNavigateToDetails()
+            viewModel.resetEvent()
+        }
+    }
+
     val columns = when (orientation) {
         Configuration.ORIENTATION_PORTRAIT -> 1
         else -> 2
@@ -52,8 +56,8 @@ fun RecipeListView(
                 items(response.recipes) { recipe ->
                     RecipeCard(
                         modifier = Modifier.clickable {
-                            viewModel.selectRecipe(recipe = recipe)
-                            navController.navigate(route = "details")
+                            viewModel.selectRecipe(recipe = recipe, /*could pass in onNavigate here*/)
+                            /*onNavigateToDetails()*/
                         },
                         thumbnail = "https://coles.com.au/" + recipe.dynamicThumbnail,
                         thumbnailAlt = recipe.dynamicThumbnailAlt,

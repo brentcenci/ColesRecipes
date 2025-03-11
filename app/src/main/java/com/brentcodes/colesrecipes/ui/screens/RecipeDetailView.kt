@@ -2,20 +2,19 @@ package com.brentcodes.colesrecipes.ui.screens
 
 import android.util.Log
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import coil3.compose.rememberAsyncImagePainter
 import com.brentcodes.colesrecipes.R
 import com.brentcodes.colesrecipes.ui.components.RecipeDetailHeader
@@ -24,18 +23,16 @@ import com.brentcodes.colesrecipes.ui.components.RecipeStatsCard
 
 @Composable
 fun RecipeDetailView(
-    modifier: Modifier = Modifier,
-    navController: NavController,
-    viewModel: RecipeViewModel
+    viewModel: RecipeDetailViewModel
 ) {
 
-    val selectedRecipe by viewModel.selectedRecipe.collectAsState()
+    val selectedRecipe by viewModel.selectedRecipe
 
     selectedRecipe?.let { recipe ->
         LazyColumn(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(10.dp),
+                .fillMaxSize(),
+            contentPadding = PaddingValues(10.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             item {

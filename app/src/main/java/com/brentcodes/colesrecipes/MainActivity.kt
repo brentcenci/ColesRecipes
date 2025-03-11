@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -22,8 +23,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.brentcodes.colesrecipes.ui.Screen
 import com.brentcodes.colesrecipes.ui.screens.RecipeDetailView
+import com.brentcodes.colesrecipes.ui.screens.RecipeDetailViewModel
 import com.brentcodes.colesrecipes.ui.screens.RecipeListView
-import com.brentcodes.colesrecipes.ui.screens.RecipeViewModel
+import com.brentcodes.colesrecipes.ui.screens.RecipeListViewModel
 import com.brentcodes.colesrecipes.ui.theme.ColesRecipesTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -37,9 +39,10 @@ class MainActivity : ComponentActivity() {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 
                     val navController = rememberNavController()
-                    val vm: RecipeViewModel = hiltViewModel()
+                    val recipeListViewModel: RecipeListViewModel = hiltViewModel()
+                    val recipeDetailViewModel: RecipeDetailViewModel = hiltViewModel()
 
-                    var orientation by remember { mutableStateOf(Configuration.ORIENTATION_PORTRAIT) }
+                    var orientation by remember { mutableIntStateOf(Configuration.ORIENTATION_PORTRAIT) }
                     val configuration = LocalConfiguration.current
 
                     LaunchedEffect(configuration) {
@@ -50,17 +53,16 @@ class MainActivity : ComponentActivity() {
                     NavHost(navController = navController, startDestination = Screen.List.route, modifier = Modifier.fillMaxSize().padding(innerPadding)) {
                         composable(route = Screen.List.route) {
                             RecipeListView(
-                                modifier = Modifier,
-                                navController = navController,
                                 orientation = orientation,
-                                viewModel = vm
+                                viewModel = recipeListViewModel,
+                                onNavigateToDetails = {
+                                    navController.navigate(route = Screen.Details.route)
+                                }
                             )
                         }
                         composable(route = Screen.Details.route) {
                             RecipeDetailView(
-                                modifier = Modifier,
-                                navController = navController,
-                                viewModel = vm
+                                viewModel = recipeDetailViewModel
                             )
                         }
                     }
