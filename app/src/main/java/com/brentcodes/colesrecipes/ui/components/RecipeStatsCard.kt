@@ -12,7 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.brentcodes.colesrecipes.data.RecipeDetails
+import com.brentcodes.colesrecipes.model.RecipeDetails
 import com.brentcodes.colesrecipes.ui.theme.accentGrey
 import com.brentcodes.colesrecipes.ui.theme.textGrey
 

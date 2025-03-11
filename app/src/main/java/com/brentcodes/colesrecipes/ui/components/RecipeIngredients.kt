@@ -9,7 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.brentcodes.colesrecipes.data.Recipe
+import com.brentcodes.colesrecipes.model.Recipe
 import com.brentcodes.colesrecipes.ui.theme.textGrey
 
 @Composable

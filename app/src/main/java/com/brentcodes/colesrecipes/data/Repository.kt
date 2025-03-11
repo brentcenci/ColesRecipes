@@ -1,15 +1,36 @@
 package com.brentcodes.colesrecipes.data
 
 import android.content.Context
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
+import com.brentcodes.colesrecipes.model.Recipe
+import com.brentcodes.colesrecipes.model.RecipeResponse
+import javax.inject.Inject
 
 interface ColesRepository {
-    fun getData(): RecipeResponse?
+    val recipes: State<RecipeResponse?>
+    val selectedRecipe: State<Recipe?>
+    fun getData()
+    fun selectRecipe(recipe: Recipe)
 }
 
-class ColesRepositoryImpl(private val context: Context) : ColesRepository {
+class ColesRepositoryImpl @Inject constructor(private val context: Context) : ColesRepository {
+    private val _recipes = mutableStateOf<RecipeResponse?>(null)
+    override val recipes : State<RecipeResponse?> = _recipes
 
-    override fun getData() : RecipeResponse? {
-        return JsonFileReader.parseJson(context, "recipesSample.json")
+    private val _selectedRecipe = mutableStateOf<Recipe?>(null)
+    override val selectedRecipe : State<Recipe?> = _selectedRecipe
+
+    init {
+        getData()
+    }
+
+    override fun getData() {
+        _recipes.value = JsonFileReader.parseJson(context, "recipesSample.json")
+    }
+
+    override fun selectRecipe(recipe: Recipe) {
+        _selectedRecipe.value = recipe
     }
 
 }
