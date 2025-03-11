@@ -3,19 +3,15 @@ package com.brentcodes.colesrecipes.ui.screens
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.brentcodes.colesrecipes.data.ColesRepository
-import com.brentcodes.colesrecipes.data.Recipe
+import com.brentcodes.colesrecipes.model.Recipe
 import com.brentcodes.colesrecipes.ui.ErrorState
+import com.brentcodes.colesrecipes.ui.UserEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
-enum class UserEvent {
-    NONE,
-    NAVIGATE_TO_DETAILS
-}
 
 @HiltViewModel
 class RecipeListViewModel @Inject constructor(

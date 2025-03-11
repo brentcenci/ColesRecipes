@@ -1,4 +1,4 @@
-package com.brentcodes.colesrecipes.data
+package com.brentcodes.colesrecipes.model
 
 import kotlinx.serialization.Serializable
 

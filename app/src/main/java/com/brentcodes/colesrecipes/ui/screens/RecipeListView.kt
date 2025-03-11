@@ -15,6 +15,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.brentcodes.colesrecipes.ui.ErrorState
+import com.brentcodes.colesrecipes.ui.UserEvent
 import com.brentcodes.colesrecipes.ui.components.RecipeCard
 
 @Composable

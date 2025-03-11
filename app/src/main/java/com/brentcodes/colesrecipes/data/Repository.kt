@@ -3,6 +3,8 @@ package com.brentcodes.colesrecipes.data
 import android.content.Context
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import com.brentcodes.colesrecipes.model.Recipe
+import com.brentcodes.colesrecipes.model.RecipeResponse
 import javax.inject.Inject
 
 interface ColesRepository {
