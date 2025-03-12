@@ -8,6 +8,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.invisibleToUser
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.brentcodes.colesrecipes.model.Recipe
 import com.brentcodes.colesrecipes.ui.theme.textGrey
@@ -42,7 +44,16 @@ fun RecipeIngredientLine(ingredient: String) {
     ) {
         Text(
             text = ">",
-            modifier = Modifier.weight(0.05f),
+            modifier = Modifier
+                .weight(0.05f)
+                .semantics {
+                    /*
+                    * Setting this Chevron to invisible to the user so that
+                    * If accessibility features are active, it is not
+                    * read out to the user.
+                    */
+                    invisibleToUser()
+                           },
             lineHeight = MaterialTheme.typography.bodySmall.lineHeight,
             fontSize = MaterialTheme.typography.bodySmall.fontSize,
             color = MaterialTheme.colorScheme.textGrey,

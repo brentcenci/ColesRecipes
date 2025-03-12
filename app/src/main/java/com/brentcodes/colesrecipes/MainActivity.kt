@@ -39,8 +39,6 @@ class MainActivity : ComponentActivity() {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 
                     val navController = rememberNavController()
-                    val recipeListViewModel: RecipeListViewModel = hiltViewModel()
-                    val recipeDetailViewModel: RecipeDetailViewModel = hiltViewModel()
 
                     var orientation by remember { mutableIntStateOf(Configuration.ORIENTATION_PORTRAIT) }
                     val configuration = LocalConfiguration.current
@@ -54,16 +52,13 @@ class MainActivity : ComponentActivity() {
                         composable(route = Screen.List.route) {
                             RecipeListView(
                                 orientation = orientation,
-                                viewModel = recipeListViewModel,
                                 onNavigateToDetails = {
                                     navController.navigate(route = Screen.Details.route)
                                 }
                             )
                         }
                         composable(route = Screen.Details.route) {
-                            RecipeDetailView(
-                                viewModel = recipeDetailViewModel
-                            )
+                            RecipeDetailView()
                         }
                     }
                 }

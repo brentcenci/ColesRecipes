@@ -13,6 +13,14 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class JsonFileReaderTest {
+
+    /*
+    * Android Instrumented Tests used here due to the need for the Android context: Context
+    * object when parsing the Json from the assets file.
+    *
+    * Rather than mocking or faking this Context implementation, I have used
+    * the Android ApplicationProvider to retrieve a context in these tests.
+    * */
     private val context: Context = ApplicationProvider.getApplicationContext()
 
     @Test
@@ -25,6 +33,11 @@ class JsonFileReaderTest {
     @Test
     fun checkParseJsonWhenMissing() {
         val result = JsonFileReader.parseJson(context, "missing.json")
+        /*
+        * Could also throw the error in the parseJson function,
+        * and validate the error type here - but currently just validating
+        * that null result is obtained.
+        * */
         assertNull(result)
     }
 

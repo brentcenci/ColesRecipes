@@ -3,7 +3,6 @@ package com.brentcodes.colesrecipes.ui.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.HorizontalDivider
@@ -57,6 +56,11 @@ fun RecipeStatsCard(modifier: Modifier = Modifier, recipeDetails: RecipeDetails)
 @Composable
 fun RecipeStatSection(modifier: Modifier = Modifier, topText: String, bottomText: String) {
     Column(
+        /*
+        * Merging the descendants of this Column for Accessibility purposes
+        * This ensures that sections like "Serves" and "8" are read and kept together,
+        * facilitating a better user experience.
+        * */
         modifier = modifier.semantics(mergeDescendants = true) {},
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally

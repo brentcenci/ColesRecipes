@@ -9,8 +9,8 @@ import com.brentcodes.colesrecipes.ui.UserEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,27 +24,21 @@ class RecipeListViewModel @Inject constructor(
     private val _userEvent: MutableStateFlow<UserEvent> = MutableStateFlow(UserEvent.NONE)
     val userEvent = _userEvent.stateIn(scope = viewModelScope, SharingStarted.Eagerly, UserEvent.NONE)
 
-    val recipes = repository.recipes
+    val recipes = repository.recipes.stateIn(scope = viewModelScope, SharingStarted.Eagerly, null)
 
     init {
-        _errorState.value = ErrorState.LOADING
-        viewModelScope.launch {
-            getData()
-            if (repository.recipes.value != null) {
+        repository.recipes.map { response ->
+            if (response != null) {
                 _errorState.value = ErrorState.DATA
             } else {
                 _errorState.value = ErrorState.ERROR
             }
-        }
+        }.stateIn(scope = viewModelScope, SharingStarted.Eagerly, ErrorState.LOADING)
     }
 
     fun selectRecipe(recipe: Recipe) {
         repository.selectRecipe(recipe)
         _userEvent.value = UserEvent.NAVIGATE_TO_DETAILS
-    }
-
-    fun getData() {
-        repository.getData()
     }
 
     fun resetEvent() {

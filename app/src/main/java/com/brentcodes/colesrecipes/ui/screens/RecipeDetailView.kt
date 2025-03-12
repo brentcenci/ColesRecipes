@@ -10,12 +10,14 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil3.compose.rememberAsyncImagePainter
 import com.brentcodes.colesrecipes.R
 import com.brentcodes.colesrecipes.ui.components.RecipeDetailHeader
@@ -24,10 +26,10 @@ import com.brentcodes.colesrecipes.ui.components.RecipeStatsCard
 
 @Composable
 fun RecipeDetailView(
-    viewModel: RecipeDetailViewModel
+    viewModel: RecipeDetailViewModel = hiltViewModel()
 ) {
 
-    val selectedRecipe by viewModel.selectedRecipe
+    val selectedRecipe by viewModel.selectedRecipe.collectAsState()
 
     selectedRecipe?.let { recipe ->
         LazyColumn(

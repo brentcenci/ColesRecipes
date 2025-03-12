@@ -17,6 +17,15 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
+
+/*
+    * Android Instrumented Tests used here due to the need for the Android context: Context
+    * object when parsing the Json from the assets file.
+    *
+    * Rather than mocking or faking this Context implementation, I have used
+    * the Android ApplicationProvider to retrieve a context in these tests.
+    * */
+
 class ColesRepositoryTest {
     private lateinit var context: Context
     private lateinit var jsonFileReader : JsonReader
