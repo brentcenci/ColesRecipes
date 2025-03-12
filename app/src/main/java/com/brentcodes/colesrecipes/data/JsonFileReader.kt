@@ -5,8 +5,12 @@ import android.util.Log
 import com.brentcodes.colesrecipes.model.RecipeResponse
 import kotlinx.serialization.json.Json
 
-object JsonFileReader {
-    fun loadJsonFromAssetsAsString(context: Context, fileName: String): String? {
+interface JsonReader {
+    fun parseJson(context: Context, fileName: String): RecipeResponse?
+}
+
+object JsonFileReader : JsonReader{
+    private fun loadJsonFromAssetsAsString(context: Context, fileName: String): String? {
         val json = try {
             context.assets.open(fileName).bufferedReader().use {
                 it.readText()
@@ -18,7 +22,7 @@ object JsonFileReader {
         return json
     }
 
-    fun parseJson(context: Context, fileName: String): RecipeResponse? {
+    override fun parseJson(context: Context, fileName: String): RecipeResponse? {
         val jsonAsString = loadJsonFromAssetsAsString(context = context, fileName = fileName)
         if (jsonAsString.isNullOrBlank()) {
             Log.e("JSON", "JSON from local assets empty, unable to parse")
