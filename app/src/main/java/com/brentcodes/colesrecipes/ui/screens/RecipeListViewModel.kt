@@ -19,10 +19,10 @@ class RecipeListViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _errorState: MutableStateFlow<ErrorState> = MutableStateFlow(ErrorState.EMPTY)
-    val errorState = _errorState.stateIn(scope = viewModelScope, SharingStarted.Lazily, ErrorState.EMPTY)
+    val errorState = _errorState.stateIn(scope = viewModelScope, SharingStarted.Eagerly, ErrorState.EMPTY)
 
     private val _userEvent: MutableStateFlow<UserEvent> = MutableStateFlow(UserEvent.NONE)
-    val userEvent = _userEvent.stateIn(scope = viewModelScope, SharingStarted.Lazily, UserEvent.NONE)
+    val userEvent = _userEvent.stateIn(scope = viewModelScope, SharingStarted.Eagerly, UserEvent.NONE)
 
     val recipes = repository.recipes
 
@@ -43,7 +43,7 @@ class RecipeListViewModel @Inject constructor(
         _userEvent.value = UserEvent.NAVIGATE_TO_DETAILS
     }
 
-    private fun getData() {
+    fun getData() {
         repository.getData()
     }
 

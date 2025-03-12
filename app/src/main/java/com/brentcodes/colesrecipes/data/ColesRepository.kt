@@ -14,7 +14,7 @@ interface ColesRepository {
     fun selectRecipe(recipe: Recipe)
 }
 
-class ColesRepositoryImpl @Inject constructor(private val context: Context) : ColesRepository {
+class ColesRepositoryImpl @Inject constructor(private val context: Context, private val jsonFileReader: JsonReader) : ColesRepository {
     private val _recipes = mutableStateOf<RecipeResponse?>(null)
     override val recipes : State<RecipeResponse?> = _recipes
 
@@ -26,7 +26,7 @@ class ColesRepositoryImpl @Inject constructor(private val context: Context) : Co
     }
 
     override fun getData() {
-        _recipes.value = JsonFileReader.parseJson(context, "recipesSample.json")
+        _recipes.value = jsonFileReader.parseJson(context, "recipesSample.json")
     }
 
     override fun selectRecipe(recipe: Recipe) {
