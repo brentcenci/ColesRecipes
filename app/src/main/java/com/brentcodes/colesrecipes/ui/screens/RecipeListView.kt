@@ -14,18 +14,19 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.brentcodes.colesrecipes.ui.ErrorState
 import com.brentcodes.colesrecipes.ui.UserEvent
 import com.brentcodes.colesrecipes.ui.components.RecipeCard
 
 @Composable
 fun RecipeListView(
-    viewModel: RecipeListViewModel,
+    viewModel: RecipeListViewModel = hiltViewModel(),
     orientation: Int = 1,
     onNavigateToDetails: () -> Unit
 ) {
 
-    val recipesList by viewModel.recipes
+    val recipesList by viewModel.recipes.collectAsState()
     val errorState by viewModel.errorState.collectAsState()
     val userEvent by viewModel.userEvent.collectAsState()
 
@@ -57,8 +58,7 @@ fun RecipeListView(
                 items(response.recipes) { recipe ->
                     RecipeCard(
                         modifier = Modifier.clickable {
-                            viewModel.selectRecipe(recipe = recipe, /*could pass in onNavigate here*/)
-                            /*onNavigateToDetails()*/
+                            viewModel.selectRecipe(recipe = recipe)
                         },
                         thumbnail = "https://coles.com.au/" + recipe.dynamicThumbnail,
                         thumbnailAlt = recipe.dynamicThumbnailAlt,

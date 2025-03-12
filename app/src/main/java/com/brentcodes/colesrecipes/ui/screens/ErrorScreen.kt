@@ -22,12 +22,12 @@ fun ErrorScreen(modifier: Modifier = Modifier, errorType: String, errorMessage: 
                 fontWeight = MaterialTheme.typography.headlineLarge.fontWeight,
                 textAlign = MaterialTheme.typography.headlineLarge.textAlign,
                 lineHeight = MaterialTheme.typography.headlineLarge.lineHeight
-                )
+            )
             Text(
                 text = errorMessage,
                 fontSize = MaterialTheme.typography.bodyLarge.fontSize,
                 fontWeight = MaterialTheme.typography.bodyLarge.fontWeight,
-                textAlign = MaterialTheme.typography.bodyLarge.textAlign,
+                textAlign = MaterialTheme.typography.bodyLarge.textAlign
             )
         }
     }

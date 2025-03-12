@@ -5,9 +5,13 @@ import com.brentcodes.colesrecipes.data.JsonFileReader
 import com.brentcodes.colesrecipes.model.Recipe
 import com.brentcodes.colesrecipes.model.RecipeDetails
 import com.brentcodes.colesrecipes.ui.screens.RecipeDetailViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.advanceUntilIdle
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
+import org.junit.jupiter.api.DisplayName
 
 class RecipeDetailViewModelTest {
 
@@ -39,9 +43,12 @@ class RecipeDetailViewModelTest {
         viewModel = RecipeDetailViewModel(testRepository)
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
-    fun getSelectedRecipe() {
+    @DisplayName("Given the ViewModel is loaded, when you select a recipe in the repository, then the ViewModel should reflect the same recipe")
+    fun getSelectedRecipe() = runTest {
         testRepository.selectRecipe(recipe = testRecipe)
+        advanceUntilIdle()
         assertEquals(testRecipe, viewModel.selectedRecipe.value)
     }
 }

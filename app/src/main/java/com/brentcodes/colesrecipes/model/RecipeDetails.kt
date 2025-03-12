@@ -8,6 +8,7 @@ data class RecipeDetails(
     val amountNumber: Int,
     val prepLabel: String,
     val prepTime: String,
+    // Currently not doing anything with prepNote - missing from design documents in brief
     val prepNote: String? = null,
     val cookingLabel: String,
     val cookingTime: String,

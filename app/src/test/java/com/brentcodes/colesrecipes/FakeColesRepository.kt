@@ -7,13 +7,16 @@ import com.brentcodes.colesrecipes.data.JsonReader
 import com.brentcodes.colesrecipes.model.Recipe
 import com.brentcodes.colesrecipes.model.RecipeDetails
 import com.brentcodes.colesrecipes.model.RecipeResponse
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 class FakeColesRepository(private val jsonFileReader: JsonReader) : ColesRepository{
-    private val _recipes = mutableStateOf<RecipeResponse?>(null)
-    override val recipes : State<RecipeResponse?> = _recipes
+    private val _recipes = MutableStateFlow<RecipeResponse?>(null)
+    override val recipes : StateFlow<RecipeResponse?> = _recipes.asStateFlow()
 
-    private val _selectedRecipe = mutableStateOf<Recipe?>(null)
-    override val selectedRecipe : State<Recipe?> = _selectedRecipe
+    private val _selectedRecipe = MutableStateFlow<Recipe?>(null)
+    override val selectedRecipe : StateFlow<Recipe?> = _selectedRecipe.asStateFlow()
 
     private val testRecipeResponse = RecipeResponse(
         recipes = listOf(
@@ -59,6 +62,10 @@ class FakeColesRepository(private val jsonFileReader: JsonReader) : ColesReposit
     )
     override fun getData() {
         _recipes.value = testRecipeResponse
+    }
+
+    fun setResponseAsNull() {
+        _recipes.value = null
     }
 
     override fun selectRecipe(recipe: Recipe) {

@@ -9,7 +9,7 @@ interface JsonReader {
     fun parseJson(context: Context, fileName: String): RecipeResponse?
 }
 
-object JsonFileReader : JsonReader{
+object JsonFileReader : JsonReader {
     private fun loadJsonFromAssetsAsString(context: Context, fileName: String): String? {
         val json = try {
             context.assets.open(fileName).bufferedReader().use {
