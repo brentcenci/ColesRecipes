@@ -3,6 +3,8 @@ package com.brentcodes.colesrecipes.ui.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
@@ -11,6 +13,7 @@ import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.brentcodes.colesrecipes.model.RecipeDetails
 import com.brentcodes.colesrecipes.ui.theme.accentGrey
@@ -21,20 +24,26 @@ fun RecipeStatsCard(modifier: Modifier = Modifier, recipeDetails: RecipeDetails)
     Column(modifier = modifier) {
         HorizontalDivider(thickness = 3.dp, color = MaterialTheme.colorScheme.accentGrey)
         Row(
-            modifier = Modifier.padding(vertical = 10.dp)
+            modifier = Modifier.fillMaxWidth().padding(vertical = 10.dp)
         ) {
             RecipeStatSection(
                 modifier = Modifier.weight(1f),
                 topText = recipeDetails.amountLabel,
                 bottomText = recipeDetails.amountNumber.toString()
             )
-            VerticalDivider(thickness = 2.dp, color = MaterialTheme.colorScheme.accentGrey)
+            VerticalDivider(
+                thickness = 2.dp,
+                color = MaterialTheme.colorScheme.accentGrey
+            )
             RecipeStatSection(
                 modifier = Modifier.weight(1f),
                 topText = recipeDetails.prepLabel,
                 bottomText = recipeDetails.prepTime
             )
-            VerticalDivider(thickness = 2.dp, color = MaterialTheme.colorScheme.accentGrey)
+            VerticalDivider(
+                thickness = 2.dp,
+                color = MaterialTheme.colorScheme.accentGrey
+            )
             RecipeStatSection(
                 modifier = Modifier.weight(1f),
                 topText = recipeDetails.cookingLabel,
@@ -47,7 +56,11 @@ fun RecipeStatsCard(modifier: Modifier = Modifier, recipeDetails: RecipeDetails)
 
 @Composable
 fun RecipeStatSection(modifier: Modifier = Modifier, topText: String, bottomText: String) {
-    Column(modifier = modifier, verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(
+        modifier = modifier.semantics(mergeDescendants = true) {},
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         Text(
             text = topText,
             fontSize = MaterialTheme.typography.labelMedium.fontSize,
