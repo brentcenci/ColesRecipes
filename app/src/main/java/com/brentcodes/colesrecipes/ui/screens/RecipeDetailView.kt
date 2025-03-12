@@ -2,6 +2,7 @@ package com.brentcodes.colesrecipes.ui.screens
 
 import android.util.Log
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -58,7 +59,7 @@ fun RecipeDetailView(
                 )
             }
             item {
-                RecipeStatsCard(recipeDetails = recipe.recipeDetails, modifier = Modifier.fillMaxWidth().height(80.dp))
+                RecipeStatsCard(recipeDetails = recipe.recipeDetails, modifier = Modifier.fillMaxWidth().height(IntrinsicSize.Min))
             }
             item {
                 RecipeIngredients(recipe = recipe)
